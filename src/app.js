@@ -1,27 +1,18 @@
-/* eslint-disable react/react-in-jsx-scope */
 import React, { Component } from 'react'
+// import Taro, { Component, Config } from '@tarojs/taro';
 import { Provider } from 'react-redux'
-import configStore from './store'
+import dva from './utils/dva'
+import models from './models'
 
-import './app.scss'
+const dvaApp = dva.createApp({
+  initialState: {},
+  models: models
+})
 
-const store = configStore()
+const store = dvaApp.getStore()
 
 class App extends Component {
-
-  componentDidMount () {
-    console.log(111)
-  }
-
-  componentDidShow () {}
-
-  componentDidHide () {}
-
-  componentDidCatchError () {}
-
-  // this.props.children 是将要会渲染的页面
-  render () {
-    console.log(this.props)
+  render() {
     return (
       <Provider store={store}>
         {this.props.children}

@@ -42,6 +42,8 @@
     "@tarojs/taro": "3.0.0-rc.6",
     "autoprefixer": "^9.8.4",
     "axios": "^0.19.2",
+    "dva-core": "^2.0.2",
+    "dva-loading": "^3.0.20",
     "mockjs": "^1.1.0",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",

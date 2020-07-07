@@ -3,8 +3,10 @@ import { View, Text, Button } from '@tarojs/components'
 import { connect } from 'react-redux'
 import './index.scss'
 
-@connect(({ index }) => ({
-  ...index
+import { add, minus, asyncAdd } from '../../store/actions/counter'
+
+@connect(({ counter }) => ({
+  ...counter
 }))
 
 class Index extends Component {
@@ -12,34 +14,23 @@ class Index extends Component {
     num: 1
   }
   componentWillMount () {
-    console.log(this.props)
+    console.log(this.props, this.state)
   }
+
+  componentDidHide () { }
   add = () => {
-    this.props.dispatch({
-      type: 'index/updateVersion',
-      payload: {
-        v: '1.0.2',
-        page: 1
-      }
-    })
+    this.props.dispatch(add())
   }
   dec = () => {
-    this.props.dispatch({
-      type: 'index/updateVersion',
-      payload: {
-        v: '1.0.0',
-        page: 1
-      }
-    })
+    this.props.dispatch(minus())
   }
-  componentDidHide () { }
   render () {
     return (
       <View className='index'>
         <Button onClick={this.add}>+</Button>
         <Button onClick={this.dec}>-</Button>
-        {/* <Button onClick={() => this.props.dispatch(asyncAdd())}>异步请求</Button> */}
-        <Text>counter: {this.props.v}</Text>
+        <Button onClick={() => this.props.dispatch(asyncAdd())}>异步请求</Button>
+        <Text>counter: {this.props.num}</Text>
       </View>
     )
   }
