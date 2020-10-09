@@ -1,48 +1,37 @@
-import React, { Component } from 'react'
+import Taro from '@tarojs/taro'
+import React from 'react'
+import { connect } from "react-redux";
 import { View, Text, Button } from '@tarojs/components'
-import { connect } from 'react-redux'
-import './index.scss'
-
-@connect(({ index }) => ({
-  ...index
-}))
-
-class Index extends Component {
-  state = {
-    num: 1
-  }
-  componentWillMount () {
-    console.log(this.props)
-  }
-  add = () => {
-    this.props.dispatch({
-      type: 'index/updateVersion',
+const Main = ({
+  dispatch,
+  common,
+  main
+}) => {
+  console.log(dispatch, common, main)
+  const handleList = (type) => {
+    dispatch({
+      type: 'main/getList',
       payload: {
-        v: '1.0.2',
-        page: 1
+        type: type
       }
     })
   }
-  dec = () => {
-    this.props.dispatch({
-      type: 'index/updateVersion',
-      payload: {
-        v: '1.0.0',
-        page: 1
+  return (
+    <View>
+      <View>{common.isModel}</View>
+      {
+        main.list.map(e => <Text>{e}</Text>)
       }
-    })
-  }
-  componentDidHide () { }
-  render () {
-    return (
-      <View className='index'>
-        <Button onClick={this.add}>+</Button>
-        <Button onClick={this.dec}>-</Button>
-        {/* <Button onClick={() => this.props.dispatch(asyncAdd())}>异步请求</Button> */}
-        <Text>counter: {this.props.v}</Text>
+      <View>
+        <Button onClick={() => handleList(1)}>数字</Button>
+        <Button onClick={() => handleList(2)}>字母</Button>
+        <Button onClick={() => handleList(3)}>汉字</Button>
       </View>
-    )
-  }
+    </View>
+  )
 }
 
-export default Index
+export default connect(({ common, main }) => ({
+  common,
+  main
+}))(Main)

@@ -1,7 +1,7 @@
 import common from './common'
-import index from '../pages/index/model'
+import main from '../pages/index/model'
 
 export default [
   common,
-  index
+  main
 ]

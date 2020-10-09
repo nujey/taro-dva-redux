@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import Taro, { Component, Config } from '@tarojs/taro';
+// import Taro, { Component } from '@tarojs/taro';
 import { Provider } from 'react-redux'
 import dva from './utils/dva'
 import models from './models'
@@ -12,6 +12,9 @@ const dvaApp = dva.createApp({
 const store = dvaApp.getStore()
 
 class App extends Component {
+  componentDidMount() {
+    console.log(this.props)
+  }
   render() {
     return (
       <Provider store={store}>
